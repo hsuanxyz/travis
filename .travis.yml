@@ -1,0 +1,11 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - '12.13.1'
+before_script:
+  - npm install -g surge
+script:
+  - export DEPLOY_DOMAIN=https://preview-${TRAVIS_PULL_REQUEST}-ng-travis-antd.surge.sh
+  - surge teardown $DEPLOY_DOMAIN
+  - surge --project ./dist --domain $DEPLOY_DOMAIN
